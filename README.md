@@ -1,6 +1,6 @@
-# Kiro Coworker (Based on Agent Coworker)
+# Kiro Cowork (Based on Agent Cowork)
 
-Kiro Coworker is our customized build of the open-source Agent Coworker desktop application. It also takes advantage of Kiro-CLI features like SubAgent, MCPs, Skills etc.
+Kiro Cowork is our customized build of the open-source Agent Cowork desktop application. It also takes advantage of Kiro-CLI features like SubAgent, MCPs, Skills etc.
 
 
 We improve the UX and capabilities (500 plus MCP tools & vast array of skills). It can make audio, professional quality video, presentations, excel models, ppts
@@ -8,7 +8,7 @@ and many more things. It can help you with emails, social media, cancelling unwa
 
 It keeps the familiar Electron + React UX while swapping the runtime for **Kiro CLI**, so you can use every model Kiro supports.
 
-The original Agent Coworker build on top of Claude Code SDK and launches it with Claude Agents SDK. We do not have a Kiro SDK yet.
+The original Agent Cowork build on top of Claude Code SDK and launches it with Claude Agents SDK. We do not have a Kiro SDK yet.
 So we develop a custom interface to the Kiro CLI through SQLLiteDatabase where Kiro-CLI stores convesation information.
 
 To summarize:
@@ -22,14 +22,14 @@ To summarize:
 
 ## Model & Provider Compatibility
 
-If a model works in `kiro-cli`, it works in Kiro Coworker: Claude (Anthropic API or Bedrock), Kimi K2, MiniMax M2, DeepSeek, GLM, etc. Configure providers once inside Kiro CLI and the desktop app automatically uses those settings.
+If a model works in `kiro-cli`, it works in Kiro Cowork: Claude (Anthropic API or Bedrock), Kimi K2, MiniMax M2, DeepSeek, GLM, etc. Configure providers once inside Kiro CLI and the desktop app automatically uses those settings.
 
 ---
 
 ## Architecture Overview
 
-![Kiro Coworker Architecture](images/architecture.png)
-![Agent Coworker vs Kiro Coworker](images/AgentCoworkvsKiroCoworker.png)
+![Kiro Cowork Architecture](images/architecture.png)
+![Agent Cowork vs Kiro Cowork](images/AgentCoworkvsKiroCoworker.png)
 ![SQLite Polling Flow](images/SQLLite.png)
 
 | Layer | Responsibilities | Key Files |
@@ -38,7 +38,7 @@ If a model works in `kiro-cli`, it works in Kiro Coworker: Claude (Anthropic API
 | **React Renderer** | Zustand store + UI components (sessions, prompt bar, MCP settings, file sidebar, file upload, slash commands). | `src/ui/*` |
 | **Kiro CLI runtime** | Talks to Anthropic-compatible APIs, executes tools, runs MCP servers, and writes conversation history to its SQLite store. | `/Applications/Kiro CLI.app` or `kiro-cli` on PATH |
 | **Claude Agent SDK (helper)** | Only used for `generateSessionTitle()` to keep the automatic title suggestion feature. | `src/electron/libs/util.ts` |
-| **Persistence** | Coworker metadata/history via `sessions.db`; conversation bodies live in Kiro’s own `~/Library/Application Support/kiro-cli/data.sqlite3`. | `src/electron/libs/session-store.ts` |
+| **Persistence** | Cowork metadata/history via `sessions.db`; conversation bodies live in Kiro’s own `~/Library/Application Support/kiro-cli/data.sqlite3`. | `src/electron/libs/session-store.ts` |
 
 More details (mermaid diagrams, SQLite polling strategy, security notes) live in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and [`docs/INTEGRATION.md`](docs/INTEGRATION.md).
 
@@ -80,7 +80,7 @@ The macOS bundle is emitted to `dist/mac-arm64/Kiro Coworker.app`. Copy it into 
 
 ## Custom Agent Configuration & MCPs
 
-Kiro Coworker instantiates a custom agent named `kiro-coworker`. Its configuration lives in `~/.kiro/agents/agent_config.json`:
+Kiro Cowork instantiates a custom agent named `kiro-coworker`. Its configuration lives in `~/.kiro/agents/agent_config.json`:
 
 ```json
 {
