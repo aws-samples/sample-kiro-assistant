@@ -21,7 +21,7 @@ If a model works in `kiro-cli`, it works in Kiro Coworker: Claude (Anthropic API
 ## Architecture Overview
 
 ![Kiro Coworker Architecture](images/architecture.png)
-![Agent Coworker vs Kiro Coworker](images/agentcoworkvskirocoworker.png)
+![Agent Coworker vs Kiro Coworker](images/AgentCoworkvsKiroCoworker.png)
 ![SQLite Polling Flow](images/SQLLite.png)
 
 | Layer | Responsibilities | Key Files |
