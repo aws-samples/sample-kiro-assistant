@@ -30,7 +30,8 @@ To summarize:
 
 ## Model & Provider Compatibility
 
-If a model works in `kiro-cli`, it works in Kiro Cowork: Claude (Anthropic API or Bedrock), Kimi K2, MiniMax M2, DeepSeek, GLM, etc. Configure providers once inside Kiro CLI and the desktop app automatically uses those settings.
+If a model works in `kiro-cli`, it works in Kiro Cowork. So for example, MiniMax M2 can be selected in Kiro CLI, so it will work with Kiro Cowork.
+You set default model in ~/.kiro/settings/cli.json
 
 ---
 
@@ -174,6 +175,13 @@ Replace_with_your_key field.
 
 ---
 
+#Adding skills
+
+Adding skills is easy. You can add them using npx command and selecting Kiro option. They will show up in Settings.png dialogue.
+
+`> npx skills add remotion-dev/skills`
+
+
 ## Working With Files
 
 - **Uploads:** The paperclip copies files into the current workspace (with collision-safe renaming).
@@ -233,5 +241,7 @@ It didn't just build great tables, it also built great meaningful visualizations
 
 1. Add voice interface
 2. Fix the issue with MCP Servers that need Web Socket connections (e.g. Pencil Desktop MCP)
+3. Sanbox to working directory and select network addresses (Kiro CLI does not yet support Sandboxing)
+4. Integrate Kiro CLI with help of Kiro SDK once it is released, replacing current arrangement through SQLLite database.
 
 
