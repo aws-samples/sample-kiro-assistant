@@ -185,8 +185,8 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for additional considerations
 
 ### Excel Modelling Example
 
-![Excel Modelling Step 1](images/Excel1.png)
-![Excel Modelling Step 2](images/Excel2.png)
+![Excel Modelling Step 1](images/excel1.png)
+![Excel Modelling Step 2](images/excel2.png)
 
 ---
 
