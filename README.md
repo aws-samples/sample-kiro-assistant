@@ -202,7 +202,6 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for additional considerations
 
 1. Fork or clone `https://gitlab.aws.dev/wwps-asean-sa-genai/Kiro-Cowork`.
 2. Run `bun run dev` for iterative changes.
-3. Update docs (`docs/ARCHITECTURE.md`, `docs/INTEGRATION.md`, this `README`) when touching architecture or UX.
+3. Update docs (`docs/ARCHITECTURE.md`, `docs/INTEGRATION.md`, this `README.md`) when touching architecture or UX.
 4. Open a merge request with a clear summary and testing notes.
 
-Made with ❤️ to bring Kiro CLI’s power to every desktop. Whether you’re on Anthropic’s Bedrock runtime, Kimi’s endpoints, MiniMax’s coding plan, DeepSeek 3.2, GLM 4.7, or the classic Anthropic API, Kiro Coworker keeps the CLI workflow but adds a friendlier face. Happy hacking!
