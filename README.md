@@ -12,9 +12,9 @@ The original Agent Cowork build on top of Claude Code SDK and launches it with C
 So we develop a custom interface to the Kiro CLI through SQLLiteDatabase where Kiro-CLI stores convesation information.
 
 To summarize:
-- 🚀 **Native Electron desktop app** with hot-reloadable React/Tailwind renderer
+- 🚀 **Native Electron desktop app** Can help with tasks that you didn't know Kiro could help you with: make Audio, Video, Presentations, help you file expenses, cancel subscriptions and so on.
 - 🧠 **Powered entirely by `kiro-cli`** (no Claude CLI required) with Kiro look and feel
-- 🧩 **500 MCPs through Composion. Additional MCPs for Excel, Pencil Desktop etc** surfaced inside Settings
+- 🧩 **500 MCPs through Composio. Additional MCPs for Excel, Pencil Desktop etc** surfaced inside Settings
 - 📂 **Auto-provisioned workspaces** per session under `~/Documents/workspace-kiro-cowork/<task-id>`
 - 💾 **SQLite-backed history** so conversations stream in real time and persist across launches
 
