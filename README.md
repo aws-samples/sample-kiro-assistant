@@ -305,5 +305,13 @@ However, the worst impact is when the CLI tries to run a command that needs user
 
 ## License
 The project started with this base https://github.com/DevAgentForge/Claude-Cowork which is under MIT. This project is also released under MIT. Kiro-CLI is an Amazon Web Services product (all right reserved).
+---
 
+## Comments on security
 
+It runs on local machine, and accesses files from working directories. It access models on Bedrock through Kiro-CLI. It is no different from using Kiro-CLI. It calls external APIs with users’ own account (OAuth). These are the services that users already trust. There is a proper login flow that helps user log in into services like ElevanLabs, HeyGen, Gmail etc.
+Local MCPs like excel, playwright don’t need credentials. We also use ZAI MCPs for dealing with PDFs, Images etc. It gets automatically used if the model being used is not multimodal. User can remove any of the MCPs they don’t prefer.
+
+This project is to be used only with non-sensitive, non official data.  Typical advisory applicable for any GenAI service applies to this one.
+
+**Remember this is not a production ready project for your sensitive data! **
