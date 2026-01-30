@@ -252,9 +252,12 @@ It has many skills for PPTs, Excel, Videos etc. Here is a simple promotional vid
 
 
 ### Converting articles to audio and video podcasts, great for making training videos (click on the image)
-You can give it article that you don't have time to read. It can convert them to audio podcasts.You can ask it do research and make into a podcast.
-For example, here is make a podcast on Moltbot controversy for me. It 1/ did the research, 2/ wrote a script, 3/ produced audio using Elevan Labs (MP3), 
-4/ produced a poster, 5/ stitched together poster and MP3 to produce MP4 using FFMPEG. 
+You can give it article that you don't have time to read. It can convert them to audio podcasts.
+
+You can even ask it do research for you and make the output into podcasts so you can listen while doing mundane activities.
+For example, here it is making a podcast for me on Moltbot controversy. It 1/ did the research, 2/ wrote a script, 3/ produced audio using ElevanLabs (MP3), 
+4/ produced a poster, 5/ stitched together the poster and MP3 to produce MP4 using FFMPEG. 
+
 Just listen and remember this is all being orchestrated autonomously by Kiro-CLI. I did not have to do anything.
 
   <a href="https://www.youtube.com/watch?v=NSRqhYI8oeo">
