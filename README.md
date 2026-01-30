@@ -291,9 +291,10 @@ However, the worst impact is when the CLI tries to run a command that needs user
 
 ## Recommednations for the Kiro team
 
-1. Allow Kiro-CLI to stream its output as JSON responses as Claude Agents SDK does
-2. Deliver Kiro SDK no later than Feb 2026. Kiro CLI has potential to be used as general purpose agent, as well as, a building block for enterprise applications.
+1. Allow Kiro-CLI to stream its output as JSON responses as Claude Code CLI does. This makes integration easy, even in absence of an official Kiro SDK.
+2. Deliver Kiro SDK no later than Feb 2026. Kiro CLI has potential to be used as general purpose agent, as well as, as a building block for enterprise applications.
 3. Enable token based billing in Kiro CLI so enterprise could use it as a building block for their agentic application.
+4. Enable sandbox feature in Kiro-CLI ASAP so its access on the local desktop can be limited.
 ---
 
 ## License
