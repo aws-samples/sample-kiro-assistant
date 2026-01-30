@@ -63,8 +63,8 @@ You set default model in ~/.kiro/settings/cli.json
 
 ## Promoting builder culture
 
-Launch of Claude Cowrker closely followed by Motbot (earlier called Clawdbot) has worken up the popular culture to power of general purpose agents.
-We want Amazonians and Amazon customers to equally participate in this movement while building secure and scalable general purpose agents.
+Launch of Claude Cowrker closely followed by OpenClaw (earlier called Clawdbot, later named to Moltbot) has worken up the popular culture to the power of general purpose agents.
+We want Amazonians and Amazon customers to equally be able to build general purpose agents following their approches but secure and scalable AWS stack.
 
 Hence, we document this project extensively in the /docs folder: 
 [ARCHITECTURE.md](/docs/ARCHITECTURE.md),
