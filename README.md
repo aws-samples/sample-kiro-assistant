@@ -265,7 +265,9 @@ Just listen and remember this is all being orchestrated autonomously by Kiro-CLI
   </a>
 
 
-If you want to record a training video, you can give it text and it will make a perfectly edited video for you.
+If you want to record a training video, you can give it text and it will make a perfectly edited video for you. It will figure out services to use and deliver the final outcome.
+You may need to give feedback sometimes (off-coures).
+
   <a href="https://www.youtube.com/watch?v=468Kns96eLA">
     <img src="https://img.youtube.com/vi/468Kns96eLA/0.jpg" alt="Video podcast creation" width="100%">
   </a>
