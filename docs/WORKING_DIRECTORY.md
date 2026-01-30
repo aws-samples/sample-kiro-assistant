@@ -1,6 +1,6 @@
-# Working Directory Management in Kiro Coworker
+# Working Directory Management in Kiro Cowork
 
-Kiro Coworker automatically manages the filesystem workspace for each task so that sessions never collide. This document explains how it works and why the UI no longer asks you to pick a directory.
+Kiro Cowork automatically manages the filesystem workspace for each task so that sessions never collide. This document explains how it works and why the UI no longer asks you to pick a directory.
 
 ## Root Workspace
 
@@ -19,8 +19,8 @@ Kiro Coworker automatically manages the filesystem workspace for each task so th
 
 ## No Manual Directory Selection
 
-- The “Start Session” modal no longer has a browser/picker for working directories. Users do not point Coworker at arbitrary folders.
-- All new sessions run inside auto-generated workspaces; if you have files from another project, upload them via the paperclip button and Coworker copies them into the workspace.
+- The “Start Session” modal no longer has a browser/picker for working directories. Users do not point Cowork at arbitrary folders.
+- All new sessions run inside auto-generated workspaces; if you have files from another project, upload them via the paperclip button and Cowork copies them into the workspace.
 - This design ensures:
   - **Isolation:** No two tasks share a directory, so Kiro CLI never resumes the wrong conversation.
   - **Safety:** The CLI stays within the sandboxed folder unless you explicitly upload/copy files in.
