@@ -19,15 +19,17 @@ To summarize:
 - 📂 **Auto-provisioned workspaces** per session under `~/Documents/workspace-kiro-cowork/<task-id>`
 - 💾 **SQLite-backed history** so conversations stream in real time and persist across launches
 
-**Kiro Cowork is for every one in the family**
+---
+
+# Kiro Cowork is for every one in the family
 
 ![Kiro Cowork Concept](images/KiroCoworkConcept.png)
 
-**Kiro Cowork is highly versatile**
+---
+
+# Kiro Cowork is highly versatile
 
 ![Kiro Cowork Versatility](images/KiroApplications.png)
-
-
 
 ---
 
