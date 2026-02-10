@@ -54,7 +54,7 @@ Task: Make me an audio podcast of 3 minutes on moltbot controvery. I want to upl
 
 ---
 
-## Model & Provider Compatibility
+
 
 If a model works in `kiro-cli`, it works in Kiro Assistant. So for example, MiniMax M2 can be selected in Kiro CLI, so it will work with Kiro Assistant.
 Kiro Assistant always uses the model stored in `~/Library/Application Support/kiro-assistant/assistant-settings.json` (managed through the Settings → Default Model dropdown). If you haven’t picked one yet, it falls back to `claude-opus-4.5`. Every prompt launches a fresh `kiro-cli` process using whatever model is currently selected, so changing the dropdown takes effect on the very next run.
@@ -74,10 +74,6 @@ Available models today:
 - `glm-4.7`
 - `glm-4.7-flash`
 - `qwen3-coder-next`
-
-Set the env var to whichever model your account supports and Kiro Assistant will pass it to every `kiro-cli chat` invocation.
-
----
 
 ## Promoting builder culture
 
@@ -348,6 +344,6 @@ This project is to be used only with non-sensitive, non official data.  Typical
 **Remember this is not a production ready project for your sensitive data!**
 
 **Remember this is not a reference architecture, but a prototype.**
-## Model & Provider Compatibility
+
 
 If a model works in `kiro-cli`, it works in Kiro Assistant. So for example, MiniMax M2 can be selected in Kiro CLI, so it will work with Kiro Assistant.
