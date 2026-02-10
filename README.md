@@ -59,6 +59,24 @@ Task: Make me an audio podcast of 3 minutes on moltbot controvery. I want to upl
 If a model works in `kiro-cli`, it works in Kiro Cowork. So for example, MiniMax M2 can be selected in Kiro CLI, so it will work with Kiro Cowork.
 You set default model in ~/.kiro/settings/cli.json
 
+The most common launch setup is to export `KIRO_DEFAULT_MODEL=<model-id>` before starting Kiro Cowork (or via `launchctl setenv` when launching from Finder). Available models today:
+
+- `claude-opus-4.6` – experimental Claude Opus 4.6
+- `claude-opus-4.6-1m` – experimental Opus 4.6 with 1M context
+- `claude-opus-4.5`
+- `claude-sonnet-4.5` (current default)
+- `claude-sonnet-4.5-1m`
+- `claude-sonnet-4`
+- `claude-haiku-4.5`
+- `deepseek-3.2`
+- `kimi-k2.5`
+- `minimax-m2.1`
+- `glm-4.7`
+- `glm-4.7-flash`
+- `qwen3-coder-next`
+
+Set the env var to whichever model your account supports and Cowork will pass it to every `kiro-cli chat` invocation.
+
 ---
 
 ## Promoting builder culture
@@ -330,3 +348,7 @@ This project is to be used only with non-sensitive, non official data.  Typical
 **Remember this is not a production ready project for your sensitive data!**
 
 **Remember this is not a reference architecture, but a prototype.**
+## Model & Provider Compatibility
+
+If a model works in `kiro-cli`, it works in Kiro Cowork. So for example, MiniMax M2 can be selected in Kiro CLI, so it will work with Kiro Cowork.
+You set default model in ~/.kiro/settings/cli.json
