@@ -1,6 +1,6 @@
 {
-    "appId": "com.devagentforge.kirodesktop",
-    "productName": "Kiro Coworker",
+    "appId": "com.devagentforge.kiroassistant",
+    "productName": "Kiro Assistant",
     "files": [
         "dist-electron",
         "dist-react"

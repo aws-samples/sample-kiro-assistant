@@ -1,13 +1,13 @@
-# How did we replace Claude Code CLI in Agent Cowork with Kiro CLI for Kiro Cowork
+# How did we replace Claude Code CLI in Agent Cowork with Kiro CLI for Kiro Assistant
 
 ## Stack Snapshot
 
 - **Electron main** (`src/electron/main.ts`, `src/electron/ipc-handlers.ts`) boots the `BrowserWindow`, wires IPC handlers, proxies file operations, fans out renderer events, and publishes desktop-only helpers like `copy-files-to-cwd`, `run-kiro-command`, `get-skills`, and MCP persistence.
 - **Runner + Kiro adapters** (`src/electron/libs/runner.ts`, `kiro-cli.ts`, `kiro-conversation.ts`, `kiro-message-adapter.ts`) discover the `kiro-cli` binary, spawn `kiro-cli chat ...`, read Kiro’s SQLite conversation store, and translate raw history rows into the `AgentMessage` schema consumed by the renderer.
 - **React renderer** (`src/ui/**/*`) is a Vite-powered React app with a single Zustand store that renders the session list, prompt bar, file viewers, the MCP/skills modal, and command results. It talks to Electron exclusively through the typed bridge in `src/electron/preload.cts`.
-- **Persistence** lives in two SQLite databases: `SessionStore` (`src/electron/libs/session-store.ts`) keeps Cowork’s metadata/history in `app.getPath("userData")/sessions.db`, while `kiro-cli` maintains the authoritative conversation log inside `~/Library/Application Support/kiro-cli/data.sqlite3` (macOS path; Windows/Linux paths are resolved in `kiro-cli.ts`).
+- **Persistence** lives in two SQLite databases: `SessionStore` (`src/electron/libs/session-store.ts`) keeps Kiro Assistant’s metadata/history in `app.getPath("userData")/sessions.db`, while `kiro-cli` maintains the authoritative conversation log inside `~/Library/Application Support/kiro-cli/data.sqlite3` (macOS path; Windows/Linux paths are resolved in `kiro-cli.ts`).
 - **Kiro settings** provide MCP + skill metadata. `mcp-config.ts` reads/writes `~/.kiro/agents/agent_config.json`, while `skill-loader.ts` enumerates directories inside `~/.kiro/skills`.
-- **Residual Claude Agent SDK usage** is limited to `generateSessionTitle()` in `src/electron/libs/util.ts`, which still calls `unstable_v2_prompt()` to suggest a title. The SDK no longer drives the agent runtime.
+- **Session titles** are generated locally from the user’s opening prompt (`src/electron/libs/util.ts`), so no external SDK dependency remains.
 
 ## High-Level Overview
 
@@ -85,7 +85,7 @@ sequenceDiagram
     participant Renderer as React Renderer
     participant Main as Electron Main
     participant Runner as runner.ts
-    participant Workspace as ~/Documents/workspace-kiro-cowork/task-*
+    participant Workspace as ~/Documents/workspace-kiro-assistant/task-*
     participant CLI as kiro-cli
     participant DB as kiro-cli data.sqlite3
 
@@ -107,7 +107,7 @@ sequenceDiagram
     Main->>Renderer: session.status
 ```
 
-1. **Session creation** – `session.start` triggers `SessionStore.createSession()`. If no `cwd` exists (new task), `workspace.ts` provisions `~/Documents/workspace-kiro-cowork/task-<timestamp>` and stores it in the session so Kiro CLI runs in an isolated folder.
+1. **Session creation** – `session.start` triggers `SessionStore.createSession()`. If no `cwd` exists (new task), `workspace.ts` provisions `~/Documents/workspace-kiro-assistant/task-<timestamp>` and stores it in the session so Kiro CLI runs in an isolated folder.
 2. **Running Kiro** – `runClaude()` resolves the `kiro-cli` binary (`KIRO_CLI_PATH`, `/Applications/Kiro CLI.app`, `/Applications/Kiro.app`, then `$PATH`) and spawns `kiro-cli chat --no-interactive --trust-all-tools --wrap never`. If the session already knows a `kiroConversationId`, `--resume` is added so Kiro reuses that conversation.
 3. **Conversation sync** – while the CLI runs, we poll Kiro’s SQLite database for new `conversations_v2` history rows and convert them into `StreamMessage`s (`convertKiroHistoryEntries`). Each event is immediately forwarded to the renderer and stored in `sessions.db`.
 4. **Status updates** – when the CLI exits, we do a final sync and emit `session.status`. Any error also emits `runner.error` so the renderer can surface it.
@@ -119,13 +119,13 @@ sequenceDiagram
 
 - `SessionStore` now stores `kiro_conversation_id` and `kiro_history_cursor`. We optimistically populate them when `convertKiroHistoryEntries` sees new messages so the next run can resume without rereading the full history.
 - The conversation key we query with is the normalized working directory. `loadKiroConversation()` opens `~/Library/Application Support/kiro-cli/data.sqlite3` (macOS), `%APPDATA%\kiro-cli\data.sqlite3` (Windows), or `~/.kiro-cli/data.sqlite3` (Linux) and fetches `select ... from conversations_v2 where key = ?`.
-- Each history entry contains `user`, `assistant`, and `request_metadata` blobs. `kiro-message-adapter.ts` maps them to Cowork’s `AgentMessage` schema, synthesizing UUIDs when Kiro omitted them.
+- Each history entry contains `user`, `assistant`, and `request_metadata` blobs. `kiro-message-adapter.ts` maps them to Kiro Assistant’s `AgentMessage` schema, synthesizing UUIDs when Kiro omitted them.
 - `resolveKiroCliBinary()` (in `kiro-cli.ts`) locates the CLI binary across platforms (environment override, `/Applications` bundle, PATH lookup). This keeps `runner.ts` agnostic to OS details, and we update it whenever the install layout changes.
 - `loadKiroConversation()` (in `kiro-conversation.ts`) opens Kiro’s SQLite database in read-only mode and fetches the `conversations_v2` row for the active working directory. It’s the single source of truth for chat history, which is why both the streaming poller and the final sync call it.
-- `convertKiroHistoryEntries()` (in `kiro-message-adapter.ts`) takes the raw history array from `conversations_v2.value` and emits Cowork’s internal `StreamMessage` objects (user prompts, tool uses, assistant text, etc.). This adapter lets the renderer stay decoupled from Kiro’s JSON schema.
+- `convertKiroHistoryEntries()` (in `kiro-message-adapter.ts`) takes the raw history array from `conversations_v2.value` and emits Kiro Assistant’s internal `StreamMessage` objects (user prompts, tool uses, assistant text, etc.). This adapter lets the renderer stay decoupled from Kiro’s JSON schema.
 
 > **How "streaming" works**  
-> Instead of reading the SQLite log once at the end, Cowork now polls `~/Library/Application Support/kiro-cli/data.sqlite3` about twice per second while the CLI process runs. Each poll slices off any new history entries and forwards them immediately, which gives near-real-time updates even though we still rely on the DB as the source of truth. If the polling ever causes issues we can revert by removing the interval and returning to the previous “sync only on exit” implementation in `runner.ts`.
+> Instead of reading the SQLite log once at the end, Kiro Assistant now polls `~/Library/Application Support/kiro-cli/data.sqlite3` about twice per second while the CLI process runs. Each poll slices off any new history entries and forwards them immediately, which gives near-real-time updates even though we still rely on the DB as the source of truth. If the polling ever causes issues we can revert by removing the interval and returning to the previous “sync only on exit” implementation in `runner.ts`.
 
 ## Build Footprint
 
@@ -140,17 +140,17 @@ In other words, our own logic only touches a handful of TypeScript files, but th
 
 ### Workspace management
 
-- `workspace.ts` ensures `~/Documents/workspace-kiro-cowork` exists when the app boots.
+- `workspace.ts` ensures `~/Documents/workspace-kiro-assistant` exists when the app boots.
 - Every new session auto-creates a unique subdirectory (`task-YYYYMMDD-HHMMSS[-NN]`) under that root and uses it as `cwd` for all `kiro-cli` invocations, so conversations never clash even if tasks relate to the same project.
-- The UI no longer lets users select arbitrary folders; instead they upload any required assets and Cowork copies them into the session workspace.
+- The UI no longer lets users select arbitrary folders; instead they upload any required assets and Kiro Assistant copies them into the session workspace.
 - Older sessions created before this change continue using their original directories; the automatic workspace allocation only applies to newly created sessions.
 
 ### CLI invocation & inputs
 
-- `runClaude()` spawns `kiro-cli chat --no-interactive --trust-all-tools --wrap never --model <...> --agent <...> [--resume] "<prompt>"`. By default the model is `claude-opus-4.5` and the agent profile is `kiro-coworker`, but you can override them via `KIRO_DEFAULT_MODEL` / `KIRO_AGENT`. `--resume` is included only when we have a stored conversation ID for that directory.
-- Environment variables (`KIRO_DEFAULT_MODEL`, `KIRO_AGENT`, plus the enhanced PATH) control model/agent defaults. Users override them before launching Coworker if needed.
+- `runClaude()` spawns `kiro-cli chat --no-interactive --trust-all-tools --wrap never --model <...> --agent <...> [--resume] "<prompt>"`. By default the model is `claude-opus-4.5` and the agent profile is `kiro-assistant`, but you can override them via `KIRO_DEFAULT_MODEL` / `KIRO_AGENT`. `--resume` is included only when we have a stored conversation ID for that directory.
+- Environment variables (`KIRO_DEFAULT_MODEL`, `KIRO_AGENT`, plus the enhanced PATH) control model/agent defaults. Users override them before launching Kiro Assistant if needed.
 - Slash commands and uploads operate on the session workspace: slash commands shell out to the same directory, and uploads copy files into that folder so Kiro sees them.
-- Kiro CLI writes its entire conversation history into a single row per workspace (`~/Library/Application Support/kiro-cli/data.sqlite3`, table `conversations_v2`). The `history` array grows with each tool call/result. Coworker keeps a cursor (`kiroHistoryCursor`) and on each poll slices `history[cursor:]`, converts the new entries, and forwards them to the renderer.
+- Kiro CLI writes its entire conversation history into a single row per workspace (`~/Library/Application Support/kiro-cli/data.sqlite3`, table `conversations_v2`). The `history` array grows with each tool call/result. Kiro Assistant keeps a cursor (`kiroHistoryCursor`) and on each poll slices `history[cursor:]`, converts the new entries, and forwards them to the renderer.
 - You can inspect the raw log manually via `sqlite3 ~/Library/Application\ Support/kiro-cli/data.sqlite3` and `SELECT key,value FROM conversations_v2 WHERE key='<workspace path>'`.
 - Polling works the same in both CLI modes; the only impact of the interactive toggle is whether we append `--no-interactive` (automatic exit) or leave the CLI running until you click “Stop”.
 - Why not parse stdout directly? Unlike the Claude SDK, Kiro CLI does not emit a JSON protocol on stdout—the output is meant for humans. Scraping that text would be brittle, so we rely on the structured SQLite log instead. If Kiro exposes a streaming SDK in the future we can drop the poller.
@@ -206,13 +206,13 @@ This flow allows a reopened session to display historical messages instantly (fr
 
 `enhancedEnv` (in `src/electron/libs/util.ts`) prepends Homebrew, bun, `.local/bin`, nvm/fnm/volta shims, `/usr/local/bin`, `/usr/bin`, etc. to PATH. Every CLI invocation adds `NO_COLOR=1`, `CLICOLOR=0`, and `KIRO_CLI_DISABLE_PAGER=1` to keep the output machine-friendly.
 
-Cowork passes `--model <ID>` and `--agent <name>` to every `kiro-cli chat` invocation. The defaults are `claude-sonnet-4.5` and `kiro-coworker`, but you can override them by exporting `KIRO_DEFAULT_MODEL` and/or `KIRO_AGENT` before launching the app (e.g., `KIRO_DEFAULT_MODEL=claude-opus-4.5 KIRO_AGENT=my-profile bun run dev`).
+Kiro Assistant passes `--model <ID>` and `--agent <name>` to every `kiro-cli chat` invocation. The defaults are `claude-sonnet-4.5` and `kiro-assistant`, but you can override them by exporting `KIRO_DEFAULT_MODEL` and/or `KIRO_AGENT` before launching the app (e.g., `KIRO_DEFAULT_MODEL=claude-opus-4.5 KIRO_AGENT=my-profile bun run dev`).
 
 > **Why do I see both `kiro-cli` and `kiro-cli-chat` in `ps`?**  
-> The `kiro-cli` binary is a lightweight launcher that resolves the agent profile and spawns the actual conversation engine (`kiro-cli-chat`). When Cowork starts a session the OS therefore shows two processes: the launcher (`kiro-cli …`) and the runtime worker (`kiro-cli-chat …`). Both carry the same flags and exit when the session completes.
+> The `kiro-cli` binary is a lightweight launcher that resolves the agent profile and spawns the actual conversation engine (`kiro-cli-chat`). When Kiro Assistant starts a session the OS therefore shows two processes: the launcher (`kiro-cli …`) and the runtime worker (`kiro-cli-chat …`). Both carry the same flags and exit when the session completes.
 >
 > **Why do we pass `--no-interactive`?**  
-> All Cowork runs are non-interactive: the user approves/denies tools via the UI, not via the CLI prompt. `--no-interactive` disables Kiro’s REPL/pager so the child process never waits on stdin; it’s orthogonal to streaming.
+> All Kiro Assistant runs are non-interactive: the user approves/denies tools via the UI, not via the CLI prompt. `--no-interactive` disables Kiro’s REPL/pager so the child process never waits on stdin; it’s orthogonal to streaming.
 >
 > **Does every prompt relaunch the CLI?**  
 > Yes. Each prompt spawns a new `kiro-cli chat … "<prompt>"` process. We persist the `conversation_id`/cursor in `sessions.db`, so when the next prompt arrives we spawn another process with the same working directory and `--resume`. Kiro looks up “latest conversation for this directory” and continues it automatically.
@@ -307,7 +307,7 @@ erDiagram
 ```
 
 - `SessionStore` lives in `app.getPath("userData")/sessions.db` (WAL mode). It mirrors every `stream.message` / `stream.user_prompt` the runner emits so history survives restarts.
-- Conversation bodies never live in Cowork’s DB; we always rehydrate from the Kiro SQLite store and drop stitched messages into our own history table.
+- Conversation bodies never live in Kiro Assistant’s DB; we always rehydrate from the Kiro SQLite store and drop stitched messages into our own history table.
 - Each message row stores the serialized JSON payload. The UI replays them verbatim when the user opens a historic session.
 - The session/talk list you see in the UI is sourced from the `sessions` table via `SessionStore.listSessions()`, ordered by `updated_at DESC`. Each row tracks its own title, status, working directory, and cursor, so different tasks under the same directory never overwrite each other—they simply become separate session rows.
 - Kiro CLI and the Electron app use **two separate SQLite files**:
@@ -331,4 +331,4 @@ Although Kiro CLI now drives every session, we still depend on `@anthropic-ai/cl
 
 ---
 
-This document reflects the post-port reality: Kiro CLI is the runtime, Cowork orchestrates it, and Kiro’s own settings directory (`~/.kiro`) is the bridge for MCPs and skills (while `~/.claude/settings.json` still feeds legacy environment variables).
+This document reflects the post-port reality: Kiro CLI is the runtime, Kiro Assistant orchestrates it, and Kiro’s own settings directory (`~/.kiro`) is the bridge for MCPs and skills.

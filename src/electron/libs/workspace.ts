@@ -2,7 +2,7 @@ import { existsSync, mkdirSync } from "fs";
 import { homedir } from "os";
 import { join } from "path";
 
-const WORKSPACE_ROOT = join(homedir(), "Documents", "workspace-kiro-cowork");
+const WORKSPACE_ROOT = join(homedir(), "Documents", "workspace-kiro-assistant");
 
 const pad = (value: number, length = 2) => value.toString().padStart(length, "0");
 

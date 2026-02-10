@@ -1,9 +1,9 @@
 # GitLab Deployment Notes
 
-Steps we followed to push Kiro Coworker to `https://gitlab.aws.dev/wwps-asean-sa-genai/Kiro-Cowork`:
+Steps we followed to push Kiro Assistant to `https://gitlab.aws.dev/wwps-asean-sa-genai/Kiro-Cowork`:
 
 1. **Clone / existing repo**
-   - Repo started as Agent Coworker fork (GitHub remote). We added the AWS GitLab remote and force-pushed when ready.
+   - Repo started as Agent Cowork fork (GitHub remote). We added the AWS GitLab remote and force-pushed when ready.
 
 2. **Midway-signed SSH key**
 

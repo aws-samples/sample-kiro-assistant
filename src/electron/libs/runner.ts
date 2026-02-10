@@ -65,7 +65,7 @@ export async function runClaude(options: RunnerOptions): Promise<RunnerHandle> {
 
   const normalizedCwd = normalizeWorkingDirectory(session.cwd) ?? DEFAULT_CWD;
   const model = (process.env.KIRO_DEFAULT_MODEL ?? "claude-opus-4.5").trim();
-  const agent = (process.env.KIRO_AGENT ?? "kiro-coworker").trim();
+  const agent = (process.env.KIRO_AGENT ?? "kiro-assistant").trim();
   const interactive = session.interactive === true;
   const args = ["chat", "--trust-all-tools", "--wrap", "never"];
   if (!interactive) {

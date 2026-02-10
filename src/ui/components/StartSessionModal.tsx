@@ -13,7 +13,7 @@ export function StartSessionModal({
   onStart,
   onClose
 }: StartSessionModalProps) {
-  const workspaceHint = "~/Documents/workspace-kiro-cowork";
+  const workspaceHint = "~/Documents/workspace-kiro-assistant";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/20 px-4 py-8 backdrop-blur-sm">

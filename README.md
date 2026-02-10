@@ -1,9 +1,9 @@
-# Kiro Cowork - an infinitely resourceful agent to help with your daily life
+# Kiro Assistant - an infinitely resourceful agent to help with your daily life
 
-kiro Cowork is a general purpose agent with capabilities similar to that of Manus AI and Anthropic Cowork.The idea behind Kiro Cowork is that it will help every member 
+Kiro Assistant is a general purpose agent with capabilities similar to that of Manus AI and Anthropic Cowork.The idea behind Kiro Assistant is that it will help every member 
 of the society and not just software developers. 
 
-Kiro Cowork is our customized build of the open-source Agent Cowork desktop application. We replace Claude Code CLI with our own Kiro-CLI. 
+Kiro Assistant is our customized build of the open-source Agent Cowork desktop application. We replace Claude Code CLI with our own Kiro-CLI. 
 It also takes advantage of Kiro-CLI features like SubAgent, MCPs, Skills etc.
 
 We improve the UX and capabilities (**500 plus MCP tools & vast array of skills**). It can make audio, professional quality video, presentations, excel models, ppts
@@ -16,22 +16,22 @@ To summarize:
 - 🚀 **Native Electron desktop app** Can help with tasks that you didn't know Kiro could help you with: make Audio, Video, Presentations, help you file expenses, cancel subscriptions and so on.
 - 🧠 **Powered entirely by `kiro-cli`** (no Claude CLI required) with Kiro look and feel
 - 🧩 **500 MCPs through Composio. Additional MCPs for Excel, Pencil Desktop etc** surfaced inside Settings
-- 📂 **Auto-provisioned workspaces** per session under `~/Documents/workspace-kiro-cowork/<task-id>`
+- 📂 **Auto-provisioned workspaces** per session under `~/Documents/workspace-kiro-assistant/<task-id>`
 - 💾 **SQLite-backed history** so conversations stream in real time and persist across launches
 
 ---
 
-# Kiro Cowork is for everyone in the family
+# Kiro Assistant is for everyone in the family
 
 We show that Kiro is not only for software developers, but every member of the society, for every member in your family (accessabilty features coming soon..)
 
-![Kiro Cowork Concept](images/KiroCoworkConcept.png)
+![Kiro Assistant Concept](images/KiroCoworkConcept.png)
 
 ---
 
-# Kiro Cowork is highly versatile
+# Kiro Assistant is highly versatile
 
-Kiro Cowork has 500+ tools through Composio (ElevanLab for audio, HeyGen for video, Gmail, X tools etc.). 
+Kiro Assistant has 500+ tools through Composio (ElevanLab for audio, HeyGen for video, Gmail, X tools etc.). 
 
 It can also use local MCPs for Excel and other development environments like Blender, Pencil Desktop etc. As long as you haev an MCP, it will figure out how to use it opportunistically.
 We have added **playwright** MCP to allow it ability to handle browsers.
@@ -42,7 +42,7 @@ That is how skills work.
 
 Even we don't know what it is fully capable of. Please give it a shot!
 
-![Kiro Cowork Versatility](images/KiroApplications.png)
+![Kiro Assistant Versatility](images/KiroApplications.png)
 
 ---
 
@@ -50,21 +50,21 @@ Even we don't know what it is fully capable of. Please give it a shot!
 
 Task: Make me an audio podcast of 3 minutes on moltbot controvery. I want to upload it to youtube, so create a display image and combine it with mp3 to give me an MP4.
 
-![Kiro Cowork UX](images/KiroCowork.png)
+![Kiro Assistant UX](images/KiroCowork.png)
 
 ---
 
 ## Model & Provider Compatibility
 
-If a model works in `kiro-cli`, it works in Kiro Cowork. So for example, MiniMax M2 can be selected in Kiro CLI, so it will work with Kiro Cowork.
+If a model works in `kiro-cli`, it works in Kiro Assistant. So for example, MiniMax M2 can be selected in Kiro CLI, so it will work with Kiro Assistant.
 You set default model in ~/.kiro/settings/cli.json
 
-The most common launch setup is to export `KIRO_DEFAULT_MODEL=<model-id>` before starting Kiro Cowork (or via `launchctl setenv` when launching from Finder). For example:
+The most common launch setup is to export `KIRO_DEFAULT_MODEL=<model-id>` before starting Kiro Assistant (or via `launchctl setenv` when launching from Finder). For example:
 
 ```bash
 # Terminal-launched app
 export KIRO_DEFAULT_MODEL=claude-sonnet-4.5
-open -a "Kiro Coworker"
+open -a "Kiro Assistant"
 
 # Finder/launcher (persist across app launches)
 launchctl setenv KIRO_DEFAULT_MODEL claude-sonnet-4.5
@@ -87,7 +87,7 @@ Available models today:
 - `glm-4.7-flash`
 - `qwen3-coder-next`
 
-Set the env var to whichever model your account supports and Cowork will pass it to every `kiro-cli chat` invocation.
+Set the env var to whichever model your account supports and Kiro Assistant will pass it to every `kiro-cli chat` invocation.
 
 ---
 
@@ -113,15 +113,15 @@ We highly encourage you to start contributing to the project. Kiro-CLI is awesom
 The architecture is simple. It trusts models to be resourceful and figure out a way. We use powerful models and give them necessary tools. In a way it is inspired
 by the "bitter lesson".
 
-![Kiro Cowork Principle](images/KiroCoworkPrinciple.png)
+![Kiro Assistant Principle](images/KiroCoworkPrinciple.png)
 
 Agent Cowork uses Cloud Code CLI which has a nice SDK called Claude Agents SDK. We don't have it with Kiro CLI. But we figured out a way by using SQLLiteDB maintained by Kiro CLI cleverly as shown in the diagram.
 
-![Agent Cowork vs Kiro Cowork](images/AgentCoworkvsKiroCoworker.png)
+![Agent Cowork vs Kiro Assistant](images/AgentCoworkvsKiroCoworker.png)
 
 This is a technical diagram of various components involved.
 
-![Kiro Cowork Architecture](images/architecture.png)
+![Kiro Assistant Architecture](images/architecture.png)
 
 This is a view of the SQLLite database. Every row represents a session.
 
@@ -133,7 +133,7 @@ This is a view of the SQLLite database. Every row represents a session.
 | **React Renderer** | Zustand store + UI components (sessions, prompt bar, MCP settings, file sidebar, file upload, slash commands). | `src/ui/*` |
 | **Kiro CLI runtime** | Talks to Anthropic-compatible APIs, executes tools, runs MCP servers, and writes conversation history to its SQLite store. | `/Applications/Kiro CLI.app` or `kiro-cli` on PATH |
 | **Claude Agent SDK (helper)** | Only used for `generateSessionTitle()` to keep the automatic title suggestion feature. | `src/electron/libs/util.ts` |
-| **Persistence** | Cowork metadata/history via `sessions.db`; conversation bodies live in Kiro’s own `~/Library/Application Support/kiro-cli/data.sqlite3`. | `src/electron/libs/session-store.ts` |
+| **Persistence** | Assistant metadata/history via `sessions.db`; conversation bodies live in Kiro’s own `~/Library/Application Support/kiro-cli/data.sqlite3`. | `src/electron/libs/session-store.ts` |
 
 More details (mermaid diagrams, SQLite polling strategy, security notes) live in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and [`docs/INTEGRATION.md`](docs/INTEGRATION.md).
 
@@ -148,7 +148,7 @@ More details (mermaid diagrams, SQLite polling strategy, security notes) live in
 3. **Bun (preferred) or Node.js 18+** for building.
 4. **macOS 13+** (the current build targets macOS; Windows/Linux scripts are stubbed but untested).
 
-> Each new session auto-creates a workspace under `~/Documents/workspace-kiro-cowork/<task-id>`. Use the Upload button to place files into that sandbox; the UI no longer asks you to pick folders manually.
+> Each new session auto-creates a workspace under `~/Documents/workspace-kiro-assistant/<task-id>`. Use the Upload button to place files into that sandbox; the UI no longer asks you to pick folders manually.
 
 ### Steps
 
@@ -167,21 +167,21 @@ bun run dev
 bun run dist:mac
 ```
 
-The macOS bundle is emitted to `dist/mac-arm64/Kiro Coworker.app`. Copy it into `/Applications` (back up any previous version first).
+The macOS bundle is emitted to `dist/mac-arm64/Kiro Assistant.app`. Copy it into `/Applications` (back up any previous version first).
 
-> We spawn `kiro-cli chat --no-interactive --trust-all-tools --wrap never --model claude-opus-4.5 --agent kiro-coworker`. Override defaults with `KIRO_DEFAULT_MODEL` / `KIRO_AGENT` before launching the app.
+> We spawn `kiro-cli chat --no-interactive --trust-all-tools --wrap never --model claude-opus-4.5 --agent kiro-assistant`. Override defaults with `KIRO_DEFAULT_MODEL` / `KIRO_AGENT` before launching the app.
 
 ---
 
 ## Custom Agent Configuration & MCPs
 
-Kiro Cowork instantiates a custom agent named `kiro-coworker`. Its configuration lives in `~/.kiro/agents/agent_config.json`:
+Kiro Assistant instantiates a custom agent named `kiro-assistant`. Its configuration lives in `~/.kiro/agents/agent_config.json`:
 You may use these configurations as they are, just remember to place your keys for Composio (that provides search over 500 MCP tools) and ZAI MCP in respective
 Replace_with_your_key field.
 
 ```json
 {
-  "name": "kiro-coworker",
+  "name": "kiro-assistant",
   "description": "A custom agent for my workflow",
   "mcpServers": {
     "pencil": {
@@ -260,7 +260,7 @@ Replace_with_your_key field.
 
 - **Kiro CLI missing:** Ensure `kiro-cli` is installed or set `KIRO_CLI_PATH`.
 - **MCP server not showing:** Edit `~/.kiro/agents/agent_config.json` and refresh Settings.
-- **Long-running `execute_bash`:** Some commands (e.g., interactive `npx`) block until they finish. You can ask Kiro Cowork to run them without user input.
+- **Long-running `execute_bash`:** Some commands (e.g., interactive `npx`) block until they finish. You can ask Kiro Assistant to run them without user input.
 - **`better-sqlite3` ABI mismatch:** If you see `...better_sqlite3.node was compiled against NODE_MODULE_VERSION 137... requires NODE_MODULE_VERSION 140`, run `npx electron-rebuild -f -w better-sqlite3` to rebuild the native module against the Electron ABI you have installed.
 ---
 
@@ -306,7 +306,7 @@ You may need to give feedback sometimes (off-coures).
 
 ### Excel Modelling Example
 
-Antrhopic announced Claude for Excel. We tried capability of Kiro Cowork to do research and build excel models, it exceeded our expectations.
+Antrhopic announced Claude for Excel. We tried capability of Kiro Assistant to do research and build excel models, it exceeded our expectations.
 Below are screenshot of the excel model it built to show impact of AI bool on MAG7 stocks and Saas stocks.
 
 It got this data from reputable sources.
@@ -362,5 +362,5 @@ This project is to be used only with non-sensitive, non official data.  Typical
 **Remember this is not a reference architecture, but a prototype.**
 ## Model & Provider Compatibility
 
-If a model works in `kiro-cli`, it works in Kiro Cowork. So for example, MiniMax M2 can be selected in Kiro CLI, so it will work with Kiro Cowork.
+If a model works in `kiro-cli`, it works in Kiro Assistant. So for example, MiniMax M2 can be selected in Kiro CLI, so it will work with Kiro Assistant.
 You set default model in ~/.kiro/settings/cli.json
