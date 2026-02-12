@@ -306,14 +306,14 @@ It didn't just build great tables, it also built great meaningful visualizations
 
 1. Fork or clone `https://gitlab.aws.dev/wwps-asean-sa-genai/Kiro-Cowork`.
 2. Run `bun run dev` for iterative changes.
-3. Update docs (`docs/ARCHITECTURE.md`, `docs/INTEGRATION.md`, this `README.md`) when touching architecture or UX.
-4. Open a merge request with a clear summary and testing notes.
+3. Update docs when touching architecture or UX.
+4. Open a pull request with a clear summary and testing notes.
 ---
 
 ## Roadmap
 
 1. Add voice interface
-2. Sanbox to working directory and select network addresses (Kiro CLI does not yet support Sandboxing)
+2. Add support for MCP for Apps for interactive applications with this desktop interface.
 3. Integrate Kiro CLI with help of Kiro SDK once it is released (due soon), replacing current arrangement of getting Kiro-CLI responses through SQLite database. 
 ---
 
