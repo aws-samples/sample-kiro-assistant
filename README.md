@@ -81,7 +81,7 @@ Available models today:
 - `claude-sonnet-4`
 - `claude-haiku-4.5`
 
-Soon to be available (stay tuned)
+Soon to be available more models from Amazon Bedrock (stay tuned)
 - `deepseek-3.2`
 - `kimi-k2.5`
 - `minimax-m2.1`
