@@ -1,4 +1,4 @@
-# Kiro Assistant - an infinitely resourceful agent to help as a coworker and as an assistant
+# Kiro Assistant - an infinitely resourceful agent to help as a coworker and as a assistant
 
 Kiro Assistant is a general purpose agent with 500+ capabilities.The idea behind Kiro Assistant is that it will help every member of the society and not just software developers. 
 It can work along side you as your coworker and help with your work across your business domains: Sales, Marketing, HR, Legal, FSI, Telco etc. All you have to add it is tools (MCPs) and skills. The system can load skills based on context. It can invoke appropriate tools based on context. That is what makes the system truly general purpose.
