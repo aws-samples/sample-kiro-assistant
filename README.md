@@ -32,6 +32,11 @@ With Kiro Powers, Kiro is useful to vast array of professionals. Just define ski
 
 ![Kiro Power Concept](images/Kiro_Powers_for_Professionals.png)
 
+Soon you will be able to get Kiro Powers for professional scenarios from [Kiro Hub](https://kirohub.dev/).
+Organizations can define Kiro Powers and share between teams.
+
+![Kiro Power Concept](images/Kiro_Hub.png)
+
 ---
 
 # Kiro Assistant is highly versatile
