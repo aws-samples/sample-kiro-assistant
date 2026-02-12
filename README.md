@@ -59,7 +59,7 @@ Task: Make me an audio podcast of 3 minutes on Moltbot controversy. I want to up
 
 Task: Can you please review architectures of WAN and SeeDance video models and compare them in a ppt. Add diagrams, screenshots etc. to make your points.
 
-![Kiro Assistant1 UX](images/KiroCowork1.png)
+![Kiro Assistant2 UX](images/KiroCowork2.png)
 
 ---
 
